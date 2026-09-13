@@ -11,11 +11,17 @@ class CalculatorCLI:
     def _print(self, *args, **kwargs):
         print(*args, **kwargs, file=self._channel)
 
+    def _normalize_expression(self, expression: str) -> str:
+        return expression.replace("%", "/100")
+
     def run(self):
         if not self._args:
             self._print("Usage: python -m calculator.ui.cli <expression>")
             return
-        self._calc.expression = " ".join(self._args)
+
+        expression = " ".join(self._args)
+        self._calc.expression = self._normalize_expression(expression)
+
         try:
             result = self._calc.compute_result()
             self._print(result)
