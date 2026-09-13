@@ -10,9 +10,8 @@ BUTTONS_NAMES = [
     ['4', '5', '6', '*'],
     ['1', '2', '3', '-'],
     ['.', '0', '=', '+'],
-    ['(',  ')'],
+    ['(', ')', '%'],
 ]
-
 
 class CalculatorApp(App):
     def _browse_children(self, container):
@@ -66,6 +65,8 @@ class CalculatorApp(App):
                 self._calc.divide()
             case ".":
                 self._calc.dot()
+            case "%":
+                self._calc.percent()
             case "C":
                 self._calc.clear()
             case "(":
