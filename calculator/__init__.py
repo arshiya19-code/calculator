@@ -5,6 +5,7 @@ class Calculator:
 
     def __init__(self):
         self.expression = ""
+        self.last_result: Number | None = None
 
     def _ensure_is_digit(self, value: int | str):
         if isinstance(value, str):
@@ -37,6 +38,7 @@ class Calculator:
 
     def clear(self):
         self.expression = ""
+        self.last_result = None
 
     def open_parenthesis(self):
         self._append("(")
@@ -44,16 +46,23 @@ class Calculator:
     def close_parenthesis(self):
         self._append(")")
 
+    def percent(self):
+        self._append("/100")
+
     def compute_result(self) -> Number:
         try:
             import math
             result = eval(self.expression, math.__dict__)
-            if isinstance(result, Number):
-                self.expression = str(result)
-                return result
-            else:
+
+            if not isinstance(result, (int, float)):
                 raise ValueError("Result is not a number: " + str(result))
+
+            self.last_result = result
+            self.expression = str(result)
+            return result
+
         except Exception as e:
             expression = self.expression
             self.expression = ""
+            self.last_result = None
             raise ValueError("Invalid expression: " + expression) from e
