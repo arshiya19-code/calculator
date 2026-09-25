@@ -1,6 +1,11 @@
 Number = int | float
 
 
+def total_with_tax(subtotal: float, tax_rate: float) -> float:
+    """Return the subtotal after applying a fractional tax rate."""
+    return subtotal - (subtotal * tax_rate)
+
+
 class Calculator:
 
     def __init__(self):
