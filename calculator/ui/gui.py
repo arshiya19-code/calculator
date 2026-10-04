@@ -2,17 +2,16 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from calculator import Calculator
 
+from calculator import Calculator
 
 BUTTONS_NAMES = [
     ['7', '8', '9', '/'],
     ['4', '5', '6', '*'],
     ['1', '2', '3', '-'],
     ['.', '0', '=', '+'],
-    ['(',  ')'],
+    ['(', ')', '%'],
 ]
-
 
 class CalculatorApp(App):
     def _browse_children(self, container):
@@ -53,7 +52,7 @@ class CalculatorApp(App):
             case "=":
                 try:
                     self._calc.compute_result()
-                except ValueError as e:
+                except ValueError:
                     self.display.text = "Error"
                     return # do not update the display any further
             case "+":
@@ -66,6 +65,8 @@ class CalculatorApp(App):
                 self._calc.divide()
             case ".":
                 self._calc.dot()
+            case "%":
+                self._calc.percent()
             case "C":
                 self._calc.clear()
             case "(":
