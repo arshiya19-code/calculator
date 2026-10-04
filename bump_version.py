@@ -1,10 +1,10 @@
-from enum import Enum
-from git import Repo, TagReference, Commit
 import subprocess
 import sys
-from typing import Iterable, Tuple
 from dataclasses import dataclass
+from enum import Enum
+from typing import Iterable, Tuple
 
+from git import Commit, Repo, TagReference
 
 LOGGING = True
 
@@ -83,20 +83,20 @@ def comput_version_increment_from(commits: Iterable[Commit]) -> Tuple[VersionInc
         log(f"{index + 1}. {commit.hexsha}: `{commit.summary.strip()}`")
         if 'BREAKING CHANGE:' in commit.message:
             major_changes += 1
-            log(f"   + **major** change: `BREAKING CHANGE:` found in summary")
+            log("   + **major** change: `BREAKING CHANGE:` found in summary")
         if ':' not in commit.summary:
-            log(f"   + considered as **dev** change: commit message is not conventional")
+            log("   + considered as **dev** change: commit message is not conventional")
             major_changes += 1
         description = commit.summary.split(':')[0]
         if description.endswith('!'):
             major_changes += 1
-            log(f"   + **major** change: `!` found in description")
+            log("   + **major** change: `!` found in description")
         if description.startswith('feat'):
             minor_changes += 1
-            log(f"   + **minor** change: `feat` found in description")
+            log("   + **minor** change: `feat` found in description")
         if description.startswith('fix'):
             patch_changes += 1
-            log(f"   + **patch** change: `fix` found in description")
+            log("   + **patch** change: `fix` found in description")
         dev_changes += 1
         log(f"   + **dev** change: commit is described as `{description}`")
     increment = version_increment(major_changes, minor_changes, patch_changes, dev_changes)
@@ -108,7 +108,7 @@ def comput_version_increment_from(commits: Iterable[Commit]) -> Tuple[VersionInc
 
 
 def _poetry(*args):
-    return subprocess.run([sys.executable, "-m", "poetry", *args], capture_output=True, text=True).stdout.strip()
+    return subprocess.run([sys.executable, "-m", "poetry", *args], capture_output=True, text=True, check=False).stdout.strip()
 
 
 def get_current_version() -> str:
