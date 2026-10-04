@@ -1,6 +1,11 @@
 Number = int | float
 
 
+def total_with_tax(subtotal: float, tax_rate: float) -> float:
+    """Return the subtotal after applying a fractional tax rate."""
+    return subtotal - (subtotal * tax_rate)
+
+
 class Calculator:
 
     def __init__(self):
@@ -52,7 +57,7 @@ class Calculator:
                 self.expression = str(result)
                 return result
             else:
-                raise ValueError("Result is not a number: " + str(result))
+                raise TypeError("Result is not a number: " + str(result))
         except Exception as e:
             expression = self.expression
             self.expression = ""

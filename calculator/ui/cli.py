@@ -1,5 +1,6 @@
-from calculator import Calculator
 import sys
+
+from calculator import Calculator
 
 
 class CalculatorCLI:
