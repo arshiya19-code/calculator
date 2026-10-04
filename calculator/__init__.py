@@ -47,7 +47,7 @@ class Calculator:
         self._append(")")
 
     def percent(self):
-        self._append("/100")
+        self._append("*100")
 
     def compute_result(self) -> Number:
         try:
