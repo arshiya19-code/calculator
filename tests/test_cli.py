@@ -1,5 +1,6 @@
 import io
 import unittest
+
 from calculator.ui.cli import CalculatorCLI
 
 
