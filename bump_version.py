@@ -1,8 +1,8 @@
 import subprocess
 import sys
+from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import Enum
-from typing import Iterable, Tuple
 
 from git import Commit, Repo, TagReference
 
@@ -77,7 +77,7 @@ def all_commits_up_to_tag(repo: Repo, tag: TagReference = None) -> Iterable[Comm
         yield commit
 
 
-def comput_version_increment_from(commits: Iterable[Commit]) -> Tuple[VersionIncrement, int]:
+def comput_version_increment_from(commits: Iterable[Commit]) -> tuple[VersionIncrement, int]:
     major_changes, minor_changes, patch_changes, dev_changes = 0, 0, 0, 0
     for index, commit in enumerate(commits):
         log(f"{index + 1}. {commit.hexsha}: `{commit.summary.strip()}`")
