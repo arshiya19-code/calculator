@@ -1,6 +1,7 @@
-import os ; os.environ["KIVY_NO_ARGS"] = "1" # hack for making tests loadable in VS Code
+import os
 import unittest
 
+os.environ["KIVY_NO_ARGS"] = "1" # hack for making tests loadable in VS Code
 
 if "CI" in os.environ:
     raise unittest.SkipTest("Skipping GUI tests in CI environment")

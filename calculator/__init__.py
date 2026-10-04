@@ -55,7 +55,7 @@ class Calculator:
             result = eval(self.expression, math.__dict__)
 
             if not isinstance(result, (int, float)):
-                raise ValueError("Result is not a number: " + str(result))
+                raise TypeError("Result is not a number: " + str(result))
 
             self.last_result = result
             self.expression = str(result)
